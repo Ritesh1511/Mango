@@ -33,13 +33,13 @@ namespace Mango.Services.CouponAPI.Controllers
         {
             try
             {
-                IEnumerable<Coupon> ObjList = _db.Coupons.ToList();
+                IEnumerable<Coupon> ObjList = _db.Coupons.ToList(); //get all coupons from db
                 _response.Result = ObjList;
                
             }
              catch(Exception ex)
             {
-                _response.IsSuccess = false;
+                _response.IsSuccess = false; //if exception occurs, set IsSuccess to false
                 _response.Message = ex.Message;
             }
             return Ok(_response);
@@ -71,12 +71,12 @@ namespace Mango.Services.CouponAPI.Controllers
         ////////////////////////////////////////////////////// -- Get coupon by code
 
         [HttpGet]
-        [Route("GetCouponByCode/{code}")]
+        [Route("GetCouponByCode/{code}")] //api/CouponAPI/GetCouponByCode/code
         public object GetCouponByCode(string code)
         {
             try
             {
-                Coupon obj = _db.Coupons.First(u => u.CouponCode.ToLower() == code.ToLower());
+                Coupon obj = _db.Coupons.First(u => u.CouponCode.ToLower() == code.ToLower()); 
 
                 _response.Result = _mapper.Map<CouponDTO>(obj);
 
